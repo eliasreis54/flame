@@ -15,6 +15,22 @@ class SpritesheetGame extends FlameGame {
         spriteSheet.createAnimation(row: 0, stepTime: 0.1, to: 7);
     final ghostAnimation =
         spriteSheet.createAnimation(row: 1, stepTime: 0.1, to: 7);
+
+    // The length of stepTimes must be the same of sprites
+    final ghostAnimationVariable = spriteSheet.createAnimationVariable(
+      row: 1,
+      stepTimes: [
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.9,
+        0.1,
+        0.1,
+      ],
+      to: 7,
+    );
+
     final spriteSize = Vector2(80.0, 90.0);
 
     final vampireComponent = SpriteAnimationComponent(
@@ -29,8 +45,15 @@ class SpritesheetGame extends FlameGame {
       size: spriteSize,
     );
 
+    final ghostComponentVariable = SpriteAnimationComponent(
+      animation: ghostAnimationVariable,
+      position: Vector2(150, 340),
+      size: spriteSize,
+    );
+
     add(vampireComponent);
     add(ghostComponent);
+    add(ghostComponentVariable);
 
     // Some plain sprites
     final vampireSpriteComponent = SpriteComponent(
@@ -45,7 +68,14 @@ class SpritesheetGame extends FlameGame {
       position: Vector2(50, 220),
     );
 
+    final ghostSpriteComponentVariable = SpriteComponent(
+      sprite: spriteSheet.getSprite(1, 0),
+      size: spriteSize,
+      position: Vector2(50, 340),
+    );
+
     add(vampireSpriteComponent);
     add(ghostSpriteComponent);
+    add(ghostSpriteComponentVariable);
   }
 }
